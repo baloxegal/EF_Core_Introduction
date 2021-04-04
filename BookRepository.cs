@@ -11,9 +11,14 @@ namespace EF_Core_Introduction
     {
         public BookRepository()
         {
-
+            _context = new LibraryContext();
+            _table = _context.Set<Book>();
         }
-
+        public BookRepository(DbContextOptions options)
+        {
+            _context = new DbContext((DbContextOptions<LibraryContext>)options);
+            _table = _context.Set<Book>();
+        }
         public BookRepository(DbContext context)
         {
             _context = context;

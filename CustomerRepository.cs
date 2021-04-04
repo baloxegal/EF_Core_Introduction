@@ -11,7 +11,13 @@ namespace EF_Core_Introduction
     {
         public CustomerRepository()
         {
-            
+            _context = new LibraryContext();
+            _table = _context.Set<Customer>();
+        }
+        public CustomerRepository(DbContextOptions options)
+        {
+            _context = new DbContext((DbContextOptions<LibraryContext>)options);
+            _table = _context.Set<Customer>();
         }
         public CustomerRepository(DbContext context)
         {

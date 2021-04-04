@@ -12,7 +12,14 @@ namespace EF_Core_Introduction
 
         public GenericRepository()
         {
-                
+            _context = new LibraryContext();
+            _table = _context.Set<T>();
+        }
+
+        public GenericRepository(DbContextOptions options)
+        {
+            _context = new DbContext((DbContextOptions<LibraryContext>)options);
+            _table = _context.Set<T>();
         }
 
         public GenericRepository(DbContext context)

@@ -11,7 +11,13 @@ namespace EF_Core_Introduction
     {
         public AuthorRepository()
         {
-                
+            _context = new LibraryContext();
+            _table = _context.Set<Author>();
+        }
+        public AuthorRepository(DbContextOptions options)
+        {
+            _context = new DbContext((DbContextOptions<LibraryContext>)options);
+            _table = _context.Set<Author>();
         }
         public AuthorRepository(DbContext context)
         {
