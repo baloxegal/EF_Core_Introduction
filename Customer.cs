@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 namespace EF_Core_Introduction
 {
     class Customer : Person
-    {
-        public int Id { get; set; }
-        [Required]
+    {        
         [MaxLength(200)]
         public string Address { get; set; }
-        [Required]
         [MaxLength(20)]
         public string Card { get; set; }
         public virtual List<Order> Purchases { get; set; }

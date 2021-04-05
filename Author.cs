@@ -9,7 +9,6 @@ namespace EF_Core_Introduction
 {
     class Author : Person
     {
-        public int Id { get; set; }
         public virtual List<Book> Books { get; set; }
         //public Book Book { get; set; }
 
