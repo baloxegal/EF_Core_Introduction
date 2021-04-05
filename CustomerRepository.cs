@@ -9,20 +9,17 @@ namespace EF_Core_Introduction
 {
     class CustomerRepository : GenericRepository<Customer>
     {
-        public CustomerRepository()
+        public CustomerRepository() :base()
         {
-            _context = new LibraryContext();
-            _table = _context.Set<Customer>();
+            
         }
-        public CustomerRepository(DbContextOptions options)
+        public CustomerRepository(DbContextOptions options) : base(options)
         {
-            _context = new DbContext((DbContextOptions<LibraryContext>)options);
-            _table = _context.Set<Customer>();
+            
         }
-        public CustomerRepository(DbContext context)
+        public CustomerRepository(DbContext context) : base(context)
         {
-            _context = context;
-            _table = context.Set<Customer>();
+            
         }
     }
 }

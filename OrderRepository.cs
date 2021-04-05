@@ -9,20 +9,17 @@ namespace EF_Core_Introduction
 {
     class OrderRepository : GenericRepository<Order>
     {
-        public OrderRepository()
+        public OrderRepository() :base()
         {
-            _context = new LibraryContext();
-            _table = _context.Set<Order>();
+
         }
-        public OrderRepository(DbContextOptions options)
+        public OrderRepository(DbContextOptions options) : base(options)
         {
-            _context = new DbContext((DbContextOptions<LibraryContext>)options);
-            _table = _context.Set<Order>();
+
         }
-        public OrderRepository(DbContext context)
+        public OrderRepository(DbContext context) :base(context)
         {
-            _context = context;
-            _table = context.Set<Order>();
+
         }
     }
 }

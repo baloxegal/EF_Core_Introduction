@@ -67,20 +67,26 @@ namespace EF_Core_Introduction
 
         //Use Config class for Mapping Domain Class
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.ApplyConfiguration(new BookConfig());
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //FIND CONFIGURATION FILES BY TYPE 
+            modelBuilder.ApplyConfiguration(new BookConfig());
 
-        
+            //FIND ALL CONFIGURATION FILES  
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        }
+
+
         //Use this for define composite key - Fluent API
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<Book>().HasKey(x => x.Id);
         //    modelBuilder.Entity<Author>().HasKey(x => new { x.Id });
-        //    modelBuilder.Entity<AuthorBook>().HasKey(x => new { x.BookId, x.Author.Id });
-        //    //??????? What next, I don’t know
+        //    //modelBuilder.Entity<AuthorBook>().HasKey(x => new { x.BookId, x.Author.Id });
+        //    
+        //    //Behavior on delete
+        //    //.OnDelete(DeleteBehavior.Cascade);
         //}
 
         //Or this - Data Annotations
@@ -93,23 +99,38 @@ namespace EF_Core_Introduction
         //    public string Title { get; set; }
         //    public string Description { get; set; }
         //}
+        //}
+
+        //It is config class for modeling domain class made with Fluent API
+
+        class BookConfig : IEntityTypeConfiguration<Book>
+        {
+            public void Configure(EntityTypeBuilder<Book> builder)
+            {
+                builder.HasKey(x => x.Id);
+
+                builder.HasMany(x => x.Authors)
+                       .WithMany(x => x.Books)
+                       .UsingEntity(x => x.ToTable("AuthorsBooks"));
+
+                builder.Property(x => x.Title)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                builder.Property(x => x.Description)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                builder.Property(x => x.Available)
+                    .IsRequired();
+
+                builder.Property(x => x.Cover)
+                    .HasMaxLength(1000);
+                
+                builder.Property(x => x.Price)
+                    .IsRequired();
+
+            }
+        }
     }
-
-    //It is config class for modeling domain class made with Fluent API
-
-    //class BookConfig : IEntityTypeConfiguration<Book>
-    //{
-    //    public void Configure(EntityTypeBuilder<Book> builder)
-    //    {
-    //        builder.Property(x => x.Title)
-    //            .IsRequired()
-    //            .HasMaxLength(200);
-
-    //        builder.Property(x => x.Authors)
-    //            .IsRequired();
-
-    //        builder.Property(x => x.Description)
-    //            .IsRequired();
-    //    }
-    //}
 }

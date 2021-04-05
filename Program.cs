@@ -37,6 +37,8 @@ namespace EF_Core_Introduction
                 repAuthor.Insert(new Author("Ioane", 81));
                 repAuthor.Insert(new Author("Tolica", 37));
 
+                repAuthor.Save();
+
                 var c = repAuthor.FindAll();
 
                 foreach (var v in c)
@@ -59,9 +61,13 @@ namespace EF_Core_Introduction
                 f.Name = "Alexei";
                 repAuthor.Update(f);
 
+                repAuthor.Save();
+
                 Console.WriteLine(f);
 
                 repAuthor.Delete(5);
+
+                repAuthor.Save();
 
                 var h = repAuthor.FindAll();
 
@@ -72,6 +78,7 @@ namespace EF_Core_Introduction
 
                 var i = repAuthor.FindById(2);
                 repAuthor.Delete(i);
+                repAuthor.Save();
 
                 var j = repAuthor.FindAll();
 
@@ -81,33 +88,33 @@ namespace EF_Core_Introduction
                 }
             }
 
-            //With generic repository
+            ////With generic repository
 
-
-            //var repAuthor = new GenericRepository<Author>(new LibraryContext(options));
-            //var repCustomer = new GenericRepository<Customer>(new LibraryContext(options));
-            //var repBook = new GenericRepository<Book>(new LibraryContext(options));
-            //var repOrder = new GenericRepository<Order>(new LibraryContext(options));
-
-            //repAuthor.Insert(new Author("Ghita", 45));
-            //repAuthor.Insert(new Author("Petrica", 30));
-            //repAuthor.Insert(new Author("Vasile", 62));
-            //repAuthor.Insert(new Author("Valerica", 44));
-            //repAuthor.Insert(new Author("Ioane", 81));
-            //repAuthor.Insert(new Author("Tolica", 37));
-
-            //var c =  repAuthor.FindAll();
-
-            //foreach (var v in c)
+            //using (var libraryContext = new LibraryContext(options))
             //{
-            //    Console.WriteLine(v);
+            //    var repAuthor = new GenericRepository<Author>(libraryContext);
+            //    var repCustomer = new GenericRepository<Customer>(libraryContext);
+            //    var repBook = new GenericRepository<Book>(libraryContext);
+            //    var repOrder = new GenericRepository<Order>(libraryContext);
+
+            //    repAuthor.Insert(new Author("Ghita", 45));
+            //    repAuthor.Insert(new Author("Petrica", 30));
+            //    repAuthor.Insert(new Author("Vasile", 62));
+            //    repAuthor.Insert(new Author("Valerica", 44));
+            //    repAuthor.Insert(new Author("Ioane", 81));
+            //    repAuthor.Insert(new Author("Tolica", 37));
+
+            //    repAuthor.Save();
+
+            //    var c = repAuthor.FindAll();
+
+            //    foreach (var v in c)
+            //    {
+            //        Console.WriteLine(v);
+            //    }                
             //}
 
-
-
             //Without repository
-
-
 
             ////CREATE (INSERT)
             //using (var lc = new LibraryContext(options))

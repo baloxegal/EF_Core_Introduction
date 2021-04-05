@@ -42,22 +42,40 @@ namespace EF_Core_Introduction
         public void Insert(T obj)
         {
             _table.Add(obj);
-            _context.SaveChanges();
+        }
+        public void InsertRange(params T[] obj)
+        {
+
+            foreach (var o in obj)
+            {
+                _table.Add(o);
+            }
         }
         public void Update(T obj)
         {
             _table.Update(obj);
-            _context.SaveChanges();
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             T existing = _table.Find(id);
-            _table.Remove(existing);
-            _context.SaveChanges();
+            if(existing != null)
+            {
+                _table.Remove(existing);
+                return true;
+            }
+                return false;
         }
-        public void Delete(T obj)
+        public bool Delete(T obj)
         {
-            _table.Remove(obj);
+            if (obj != null)
+            {
+                _table.Remove(obj);
+                return true;
+            }
+            return false;
+        }
+        public void Save()
+        {
             _context.SaveChanges();
         }
     }

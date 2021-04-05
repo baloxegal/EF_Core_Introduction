@@ -15,17 +15,17 @@ namespace EF_Core_Introduction
         [MaxLength (200)]
         public string Title { get; set; }
         [Required]
-        [MaxLength(1000)]
+        [MaxLength(500)]
         public string Description { get; set; }
         [Required]
         [MaxLength(500)]
         public string Cover { get; set; }
-        public List<Author> Authors { get; set; }
+        public virtual List<Author> Authors { get; set; }
         //public int AuthorId { get; set; }
         //public Author Author { get; set; }
         public int Price { get; set; }
         public bool Available { get; set; }
-        public List<Order> Orders { get; set; }
+        public virtual List<Order> Orders { get; set; }
 
         public Book()
         {

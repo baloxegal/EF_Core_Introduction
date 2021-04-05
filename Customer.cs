@@ -16,7 +16,7 @@ namespace EF_Core_Introduction
         [Required]
         [MaxLength(20)]
         public string Card { get; set; }
-        public List<Order> Purchases { get; set; }
+        public virtual List<Order> Purchases { get; set; }
 
         public Customer()
         {

@@ -9,9 +9,9 @@ namespace EF_Core_Introduction
     class Order
     {
         public int Id { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
         public DateTime Date { get; set; }
-        public List<Book> Purchases { get; set; }
+        public virtual List<Book> Purchases { get; set; }
 
         public Order()
         {
