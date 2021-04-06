@@ -52,10 +52,10 @@ namespace EF_Core_Introduction
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    modelBuilder
-        //           .Entity<Author>()
-        //           .HasOne(a => a.Book)
-        //           .WithOne(b => b.Author)
-        //           .HasForeignKey<Book>(b => b.Autho);
+        //           .Entity<Book>()
+        //           .HasOne(a => a.Author)
+        //           .WithOne(b => b.Book)
+        //           .HasForeignKey<Author>(b => b.AuthorId);
 
 
         //It is to make one table from two classes
